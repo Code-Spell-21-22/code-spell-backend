@@ -1,0 +1,2 @@
+# code-spell-backend
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ce0878db0bd64137b42f7d43e44a66d6)](https://app.codacy.com/gh/Code-Spell/code-spell-backend?utm_source=github.com&utm_medium=referral&utm_content=Code-Spell/code-spell-backend&utm_campaign=Badge_Grade_Settings)
