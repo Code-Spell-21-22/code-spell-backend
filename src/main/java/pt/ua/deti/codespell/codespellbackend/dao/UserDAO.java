@@ -3,7 +3,6 @@ package pt.ua.deti.codespell.codespellbackend.dao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
-import org.springframework.security.core.GrantedAuthority;
 import pt.ua.deti.codespell.codespellbackend.model.User;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 @Generated
 @Data
 @AllArgsConstructor
-public class UserDAO {
+public class UserDAO implements IAbstractDAO {
 
     private String username;
     private String email;

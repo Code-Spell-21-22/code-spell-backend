@@ -1,6 +1,5 @@
 package pt.ua.deti.codespell.codespellbackend.repository;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import pt.ua.deti.codespell.codespellbackend.model.User;
 
