@@ -14,6 +14,7 @@ import java.util.List;
 @Generated
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class User implements IDataEntity {
 
     @Id
@@ -28,6 +29,20 @@ public class User implements IDataEntity {
     @NonNull
     private String password;
 
+    @NonNull
     private List<GrantedAuthority> permissions;
+
+    private String name;
+
+    private List<User> friends;
+
+    private List<Game> games;
+
+    public User(@NonNull String username, @NonNull String email, @NonNull String password, @NonNull List<GrantedAuthority> permissions) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.permissions = permissions;
+    }
 
 }
