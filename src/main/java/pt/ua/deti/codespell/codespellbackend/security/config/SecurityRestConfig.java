@@ -61,7 +61,7 @@ public class SecurityRestConfig extends WebSecurityConfigurerAdapter {
 
         // We don't need CSRF for this example
         httpSecurity.csrf().disable();
-        // httpSecurity.cors().disable();
+        httpSecurity.cors().disable();
 
     }
 
@@ -76,7 +76,7 @@ public class SecurityRestConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowCredentials(true);
         // setAllowedHeaders is important! Without it, OPTIONS preflight request
         // will fail with 403 Invalid CORS request
-        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type", "Access-Control-Allow-Origin"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
