@@ -21,6 +21,9 @@ public class Score implements IDataEntity {
     @NonNull
     private ObjectId levelId;
 
+    @NonNull
+    private User user;
+
     private int points;
 
 }

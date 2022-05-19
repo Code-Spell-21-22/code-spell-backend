@@ -30,4 +30,29 @@ public class Game implements IDataEntity {
 
     private List<Achievement> achievements;
 
+
+    public ObjectId getId() {
+        return this.id;
+    }
+
+    public List<Chapter> getChapters() {
+        return this.chapters;
+    }
+
+    public List<Chapter> getCompletedChapters() {
+        return this.completedChapters;
+    }
+
+    public Score getScore() {
+        return this.score;
+    }
+
+    public Settings getSettings() {
+        return this.settings;
+    }
+
+    public List<Achievement> getAchievements() {
+        return this.achievements;
+    }
+
 }
