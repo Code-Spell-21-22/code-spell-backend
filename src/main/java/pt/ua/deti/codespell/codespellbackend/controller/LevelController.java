@@ -22,7 +22,7 @@ import pt.ua.deti.codespell.codespellbackend.request.MessageResponse;
 import pt.ua.deti.codespell.codespellbackend.service.LevelService;
 
 @RestController
-@RequestMapping("api/")
+@RequestMapping("api/level")
 public class LevelController {
     
     private final LevelService levelService;
@@ -32,25 +32,20 @@ public class LevelController {
         this.levelService = levelService;
     }
 
-    @GetMapping("level/{level_id}/leaderboards")
+    @GetMapping("{level_id}/leaderboards")
     public List<Score> getLevelLeaderboard(@PathVariable(value = "level_id") int level_id, ProgrammingLanguage language) {
         return levelService.getScoresByLevelId(level_id); // pass programmingLanguage as an argument aswell?
     }
 
-    @GetMapping("level/{level_id}/documentation")
+    @GetMapping("{level_id}/documentation")
     public List<Documentation> getLevelDocumentation(@PathVariable(value = "level_id") int level_id, ProgrammingLanguage language) {
         Level level = levelService.findByLevelId(level_id);
         return level.getDocumentation();
     }
 
-    @GetMapping("levels")
+    @GetMapping("")
     public List<Level> getLevelsList(ProgrammingLanguage programmingLanguage, SkillLevel skillLevel) {
-        // service method or repository method? findAllLevels
-    }
-
-    @GetMapping("chapters")
-    public List<Chapter> getChaptersList(ProgrammingLanguage programmingLanguage, SkillLevel skillLevel) {
-        // service method or repository method? findAllChapters
+        return levelService.getAllLevels();
     }
 
     @GetMapping("level/{level_id}/solutions")

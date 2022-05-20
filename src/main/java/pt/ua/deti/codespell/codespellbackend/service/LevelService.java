@@ -22,6 +22,11 @@ public class LevelService {
         this.levelRepository = levelRepository;
     }
 
+    @NonNull 
+    public List<Level> getAllLevels() {
+        return levelRepository.findAll();
+    }
+
     @NonNull
     public Level findByLevelId(int level_id) {
         if (!levelRepository.existsByLevelId(level_id))

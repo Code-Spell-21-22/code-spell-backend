@@ -41,45 +41,4 @@ public class Level implements IDataEntity {
     @NonNull
     private Settings settings;
 
-
-    public ObjectId getId() {
-        return this.id;
-    }
-
-    public String getTitle() {
-        return this.title;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public Chapter getChapter() {
-        return this.chapter;
-    }
-
-    public int getNumber() {
-        return this.number;
-    }
-
-    public List<Goal> getGoals() {
-        return this.goals;
-    }
-
-    public List<Tip> getTips() {
-        return this.tips;
-    }
-
-    public List<Documentation> getDocumentation() {
-        return this.documentation;
-    }
-
-    public List<Solution> getSolutions() {
-        return this.solutions;
-    }
-
-    public Settings getSettings() {
-        return this.settings;
-    }
-
 }

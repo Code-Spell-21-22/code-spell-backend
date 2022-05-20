@@ -45,33 +45,4 @@ public class User implements IDataEntity {
         this.permissions = permissions;
     }
 
-    public String getUsername() {
-        return this.username;
-    }
-
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public List<GrantedAuthority> getPermissions() {
-        return this.permissions;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public List<User> getFriends() {
-        return this.friends;
-    }
-
-    public List<Game> getGames() {
-        return this.games;
-    }
-
 }
