@@ -61,7 +61,7 @@ public class SecurityRestConfig extends WebSecurityConfigurerAdapter {
 
         // We don't need CSRF for this example
         httpSecurity.csrf().disable();
-        httpSecurity.cors().disable();
+        //httpSecurity.cors().disable();
 
     }
 
