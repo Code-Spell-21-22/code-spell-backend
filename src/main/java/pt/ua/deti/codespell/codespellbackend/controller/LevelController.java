@@ -30,29 +30,29 @@ public class LevelController {
         this.scoreService = scoreService;
     }
 
-    @GetMapping("{level_id}/leaderboards")
+    @GetMapping("/{level_id}/leaderboards")
     public List<Score> getLevelLeaderboard(@PathVariable(value = "level_id") ObjectId levelId, Settings settings) {
         return scoreService.getScoresByLevelAndSettings(levelId, settings);
     }
 
-    @GetMapping("{level_id}/documentation")
+    @GetMapping("/{level_id}/documentation")
     public List<Documentation> getLevelDocumentation(@PathVariable(value = "level_id") ObjectId levelId, ProgrammingLanguage language) {
         Level level = levelService.findByLevelId(levelId);
         return level.getDocumentation();
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Level> getLevelsList(ProgrammingLanguage programmingLanguage, SkillLevel skillLevel) {
         return levelService.getAllLevels();
     }
 
-    @GetMapping("{level_id}/solutions")
+    @GetMapping("/{level_id}/solutions")
     public List<Solution> getLevelSolutions(@PathVariable(value = "level_id") ObjectId levelId, ProgrammingLanguage language) {
         Level level = levelService.findByLevelId(levelId);
         return level.getSolutions();
     }
 
-    @PostMapping("{level_id}/submit/{solution_id}")
+    @PostMapping("/{level_id}/submit/{solution_id}")
     public MessageResponse submitLevelSolution(@PathVariable(value = "level_id") ObjectId levelId, @PathVariable(value="solution_id") int solution_id, ProgrammingLanguage language, Solution solution) {
         Level level = levelService.findByLevelId(levelId);
         List<Solution> solutions = level.getSolutions();
@@ -60,7 +60,7 @@ public class LevelController {
         return new MessageResponse(Date.from(Instant.now()), "Solution successfully submitted.");
     }
 
-    @GetMapping("{level_id}")
+    @GetMapping("/{level_id}")
     public Level getCurrentLevel(@PathVariable(value = "level_id") ObjectId levelId) {
         return levelService.findByLevelId(levelId);
     }
