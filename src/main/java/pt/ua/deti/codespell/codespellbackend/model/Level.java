@@ -25,7 +25,7 @@ public class Level implements IDataEntity {
 
     private String description;
 
-    private Chapter chapter;
+    private ObjectId chapterId;
 
     private int number;
 

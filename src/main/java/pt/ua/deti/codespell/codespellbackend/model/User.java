@@ -2,6 +2,7 @@ package pt.ua.deti.codespell.codespellbackend.model;
 
 import com.mongodb.lang.NonNull;
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -34,7 +35,7 @@ public class User implements IDataEntity {
 
     private String name;
 
-    private List<User> friends;
+    private List<ObjectId> friendsIds;
 
     private List<Game> games;
 
