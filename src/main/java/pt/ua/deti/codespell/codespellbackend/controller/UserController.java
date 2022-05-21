@@ -41,12 +41,10 @@ public class UserController {
     @GetMapping("/{username}/achievements")
     public List<Achievement> getUserAchievements(@PathVariable(value = "username") String username) {
         User user = getUserDetails(username);
-        List<Achievement> achievements = new ArrayList();
+        List<Achievement> achievements = new ArrayList<>();
         List<Game> games = user.getGames();
         for (Game g : games) {
-            for (Achievement a : g.getAchievements()) {
-                achievements.add(a);
-            }
+            achievements.addAll(g.getAchievements());
         }
         return achievements;
     }
