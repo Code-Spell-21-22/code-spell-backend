@@ -18,7 +18,7 @@ import pt.ua.deti.codespell.codespellbackend.service.LevelService;
 import pt.ua.deti.codespell.codespellbackend.service.ScoreService;
 
 @RestController
-@RequestMapping("api/level")
+@RequestMapping("/api/level")
 public class LevelController {
     
     private final LevelService levelService;
