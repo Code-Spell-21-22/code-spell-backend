@@ -20,7 +20,7 @@ import pt.ua.deti.codespell.codespellbackend.request.MessageResponse;
 import pt.ua.deti.codespell.codespellbackend.service.UserService;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("/api/user")
 public class UserController {
     
     private final PasswordEncoder passwordEncoder;
