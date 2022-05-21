@@ -18,7 +18,7 @@ public class Solution implements IDataEntity {
     @NonNull
     private ObjectId id;
 
-    private User author;
+    private ObjectId authorId;
 
     private int scorePoints;
 

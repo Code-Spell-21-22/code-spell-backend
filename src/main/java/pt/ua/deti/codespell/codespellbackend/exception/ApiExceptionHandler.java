@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.BadRequestException;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.ExistentUserException;
+import pt.ua.deti.codespell.codespellbackend.exception.implementations.LevelNotFoundException;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.UserNotFoundException;
 
 import java.util.Date;
@@ -30,6 +31,12 @@ public class ApiExceptionHandler {
     public ResponseEntity<?> badRequestException(BadRequestException badRequestException, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), badRequestException.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(LevelNotFoundException.class)
+    public ResponseEntity<?> levelNotFoundException(LevelNotFoundException levelNotFoundException, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), levelNotFoundException.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
 }
