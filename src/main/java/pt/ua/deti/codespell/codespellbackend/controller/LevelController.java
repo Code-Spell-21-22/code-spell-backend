@@ -17,7 +17,7 @@ import pt.ua.deti.codespell.codespellbackend.service.LevelService;
 import pt.ua.deti.codespell.codespellbackend.service.ScoreService;
 
 @RestController
-@RequestMapping("api/level")
+@RequestMapping("/api/level")
 public class LevelController {
     
     private final LevelService levelService;
@@ -31,23 +31,23 @@ public class LevelController {
         this.codeExecutionHandler = codeExecutionHandler;
     }
 
-    @GetMapping("{level_id}/leaderboards")
+    @GetMapping("/{level_id}/leaderboards")
     public List<Score> getLevelLeaderboard(@PathVariable(value = "level_id") ObjectId levelId, Settings settings) {
         return scoreService.getScoresByLevelAndSettings(levelId, settings);
     }
 
-    @GetMapping("{level_id}/documentation")
+    @GetMapping("/{level_id}/documentation")
     public List<Documentation> getLevelDocumentation(@PathVariable(value = "level_id") ObjectId levelId, ProgrammingLanguage language) {
         Level level = levelService.findByLevelId(levelId);
         return level.getDocumentation();
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Level> getLevelsList(ProgrammingLanguage programmingLanguage, SkillLevel skillLevel) {
         return levelService.getAllLevels();
     }
 
-    @GetMapping("{level_id}/solutions")
+    @GetMapping("/{level_id}/solutions")
     public List<Solution> getLevelSolutions(@PathVariable(value = "level_id") ObjectId levelId, ProgrammingLanguage language) {
         Level level = levelService.findByLevelId(levelId);
         return level.getSolutions();
@@ -63,6 +63,7 @@ public class LevelController {
             throw new BadRequestException("Unable to parse solution_id to UUID");
 
         ObjectId levelId = new ObjectId(levelIdStr);
+
         Level level = levelService.findByLevelId(levelId);
         UUID solutionUUID = UUID.fromString(solutionUniqueIdStr);
 
@@ -72,7 +73,7 @@ public class LevelController {
 
     }
 
-    @GetMapping("{level_id}")
+    @GetMapping("/{level_id}")
     public Level getCurrentLevel(@PathVariable(value = "level_id") ObjectId levelId) {
         return levelService.findByLevelId(levelId);
     }

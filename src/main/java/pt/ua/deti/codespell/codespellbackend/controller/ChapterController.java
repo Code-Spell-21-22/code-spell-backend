@@ -13,7 +13,7 @@ import pt.ua.deti.codespell.codespellbackend.model.SkillLevel;
 import pt.ua.deti.codespell.codespellbackend.service.ChapterService;
 
 @RestController
-@RequestMapping("api/chapter")
+@RequestMapping("/api/chapter")
 public class ChapterController {
     
     private final ChapterService chapterService;
@@ -23,7 +23,7 @@ public class ChapterController {
         this.chapterService = chapterService;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Chapter> getChaptersList(ProgrammingLanguage programmingLanguage, SkillLevel skillLevel) {
         return chapterService.getAllChapters();
     }
