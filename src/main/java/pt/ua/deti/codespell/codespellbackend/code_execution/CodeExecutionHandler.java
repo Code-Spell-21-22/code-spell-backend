@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import pt.ua.deti.codespell.codespellbackend.model.Chapter;
 import pt.ua.deti.codespell.codespellbackend.model.Level;
 import pt.ua.deti.codespell.codespellbackend.service.ChapterService;
-import pt.ua.deti.codespell.codespellbackend.service.rabbitmq.RabbitMQSender;
+import pt.ua.deti.codespell.codespellbackend.rabbitmq.RabbitMQSender;
 
 import java.util.UUID;
 import java.util.regex.Matcher;

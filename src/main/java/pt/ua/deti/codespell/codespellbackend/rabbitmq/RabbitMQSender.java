@@ -1,4 +1,4 @@
-package pt.ua.deti.codespell.codespellbackend.service.rabbitmq;
+package pt.ua.deti.codespell.codespellbackend.rabbitmq;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
