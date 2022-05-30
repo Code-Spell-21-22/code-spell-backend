@@ -42,7 +42,7 @@ public class ScoreServiceTest {
     }
 
     @Test
-    @DisplayName("Find all scores giving certain Settings and LevelId.")
+    @DisplayName("Find all scores given certain Settings and LevelId.")
     void findAllScoresByLevelIdAndSettings() {
         
         when(scoreRepository.findByLevelIdAndSettings(score.getLevelId(), score.getSettings())).thenReturn(listOfScores);
@@ -52,6 +52,35 @@ public class ScoreServiceTest {
                 .isEqualTo(listOfScores);
 
         verify(scoreRepository, Mockito.times(1)).findByLevelIdAndSettings(any(ObjectId.class), any(Settings.class));        
+    }
+
+    @Test
+    @DisplayName("Find non-existent scores by invalid Settings or LevelId.")
+    void findNonExistentScoresByInvalidSettingsOrLevelId() {
+        // Testing with valid LevelId and invalid Settings
+        when(scoreRepository.findByLevelIdAndSettings(score.getLevelId(), new Settings(ProgrammingLanguage.JAVA, SkillLevel.ADVANCED))).thenReturn(null);
+
+        assertThat(scoreService.getScoresByLevelAndSettings(score.getLevelId(), new Settings(ProgrammingLanguage.JAVA, SkillLevel.ADVANCED)))
+                .isNull();
+
+        // Testing with invalid LevelId and valid Settings
+        ObjectId levelId = new ObjectId();
+
+        when(scoreRepository.findByLevelIdAndSettings(levelId, score.getSettings())).thenReturn(null);
+
+        assertThat(scoreService.getScoresByLevelAndSettings(levelId, score.getSettings()))
+                .isNull();        
+
+        // Testing with invalid LevelId and invalid Settings
+        levelId = new ObjectId();
+            
+        when(scoreRepository.findByLevelIdAndSettings(levelId, new Settings(ProgrammingLanguage.JAVA, SkillLevel.ADVANCED))).thenReturn(null);
+
+        assertThat(scoreService.getScoresByLevelAndSettings(levelId, new Settings(ProgrammingLanguage.JAVA, SkillLevel.ADVANCED)))
+                .isNull();
+
+        verify(scoreRepository, Mockito.times(3)).findByLevelIdAndSettings(any(ObjectId.class), any(Settings.class));        
+
     }
 
 }
