@@ -1,4 +1,4 @@
-package pt.ua.deti.codespell.codespellbackend.service.rabbitmq;
+package pt.ua.deti.codespell.codespellbackend.rabbitmq;
 
 import lombok.Getter;
 import org.springframework.amqp.core.*;
