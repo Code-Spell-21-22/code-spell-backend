@@ -1,5 +1,7 @@
 package pt.ua.deti.codespell.codespellbackend.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.mongodb.lang.NonNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,12 +18,15 @@ public class Score implements IDataEntity {
 
     @Id
     @NonNull
+    @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId id;
 
     @NonNull
+    @JsonSerialize(using=ToStringSerializer.class)
     private ObjectId levelId;
 
     @NonNull
+    @JsonSerialize(using=ToStringSerializer.class)
     private ObjectId userId;
 
     private int points;

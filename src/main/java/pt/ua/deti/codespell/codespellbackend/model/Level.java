@@ -1,5 +1,7 @@
 package pt.ua.deti.codespell.codespellbackend.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.mongodb.lang.NonNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +20,7 @@ public class Level implements IDataEntity {
 
     @Id
     @NonNull
+    @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId id;
 
     @NonNull
@@ -25,6 +28,7 @@ public class Level implements IDataEntity {
 
     private String description;
 
+    @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId chapterId;
 
     private int number;
