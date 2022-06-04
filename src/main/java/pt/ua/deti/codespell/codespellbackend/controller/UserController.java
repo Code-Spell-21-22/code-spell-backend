@@ -10,12 +10,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pt.ua.deti.codespell.codespellbackend.model.Achievement;
 import pt.ua.deti.codespell.codespellbackend.model.Game;
 import pt.ua.deti.codespell.codespellbackend.model.User;
+import pt.ua.deti.codespell.codespellbackend.request.ChangeNameRequest;
+import pt.ua.deti.codespell.codespellbackend.request.ChangePasswordRequest;
 import pt.ua.deti.codespell.codespellbackend.request.MessageResponse;
 import pt.ua.deti.codespell.codespellbackend.service.UserService;
 
@@ -50,18 +53,20 @@ public class UserController {
     }
 
     @PutMapping("/{username}/password")
-    public MessageResponse changePassword(@PathVariable(value = "username") String username, String newPassword) {
+    public MessageResponse changePassword(@PathVariable(value = "username") String username, @RequestBody ChangePasswordRequest changePasswordRequest) {
         User user = getUserDetails(username);
+        String newPassword = changePasswordRequest.getPassword();
         user.setPassword(passwordEncoder.encode(newPassword));
-
+        userService.updateUser(user);
         return new MessageResponse(Date.from(Instant.now()), "Your password was successfully changed.");
     }
 
     @PutMapping("/{username}/name")
-    public MessageResponse changeName(@PathVariable(value = "username") String username, String newName) {
+    public MessageResponse changeName(@PathVariable(value = "username") String username, @RequestBody ChangeNameRequest changeNameRequest) {
         User user = getUserDetails(username);
+        String newName = changeNameRequest.getName();
         user.setName(newName);
-
+        userService.updateUser(user);
         return new MessageResponse(Date.from(Instant.now()), "Your name was successfully changed.");
     }
 }

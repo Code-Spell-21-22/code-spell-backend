@@ -44,4 +44,11 @@ public class UserService {
 
     }
 
+    public void updateUser(User user) {
+        
+        if (!userRepository.existsByUsername(user.getUsername()))
+            throw new UserNotFoundException(String.format("The user %s could not be found.", user.getUsername()));
+        userRepository.save(user);
+
+    }
 }
