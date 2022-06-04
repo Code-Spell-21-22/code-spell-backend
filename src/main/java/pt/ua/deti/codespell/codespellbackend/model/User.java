@@ -2,6 +2,7 @@ package pt.ua.deti.codespell.codespellbackend.model;
 
 import com.mongodb.lang.NonNull;
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,6 +15,7 @@ import java.util.List;
 @Generated
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class User implements IDataEntity {
 
     @Id
@@ -28,6 +30,20 @@ public class User implements IDataEntity {
     @NonNull
     private String password;
 
+    @NonNull
     private List<GrantedAuthority> permissions;
+
+    private String name;
+
+    private List<ObjectId> friendsIds;
+
+    private List<Game> games;
+
+    public User(@NonNull String username, @NonNull String email, @NonNull String password, @NonNull List<GrantedAuthority> permissions) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.permissions = permissions;
+    }
 
 }
