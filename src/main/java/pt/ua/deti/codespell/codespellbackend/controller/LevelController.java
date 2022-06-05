@@ -32,12 +32,14 @@ public class LevelController {
     }
 
     @GetMapping("/{level_id}/leaderboards")
-    public List<Score> getLevelLeaderboard(@PathVariable(value = "level_id") ObjectId levelId, Settings settings) {
+    public List<Score> getLevelLeaderboard(@PathVariable(value = "level_id") String levelIdStr, @RequestBody Settings settings) {
+        ObjectId levelId = new ObjectId(levelIdStr);
         return scoreService.getScoresByLevelAndSettings(levelId, settings);
     }
 
     @GetMapping("/{level_id}/documentation")
-    public List<Documentation> getLevelDocumentation(@PathVariable(value = "level_id") ObjectId levelId, ProgrammingLanguage language) {
+    public List<Documentation> getLevelDocumentation(@PathVariable(value = "level_id") String levelIdStr, ProgrammingLanguage language) {
+        ObjectId levelId = new ObjectId(levelIdStr);
         Level level = levelService.findByLevelId(levelId);
         return level.getDocumentation();
     }
@@ -48,7 +50,8 @@ public class LevelController {
     }
 
     @GetMapping("/{level_id}/solutions")
-    public List<Solution> getLevelSolutions(@PathVariable(value = "level_id") ObjectId levelId, ProgrammingLanguage language) {
+    public List<Solution> getLevelSolutions(@PathVariable(value = "level_id") String levelIdStr, ProgrammingLanguage language) {
+        ObjectId levelId = new ObjectId(levelIdStr);
         Level level = levelService.findByLevelId(levelId);
         return level.getSolutions();
     }
@@ -74,7 +77,8 @@ public class LevelController {
     }
 
     @GetMapping("/{level_id}")
-    public Level getCurrentLevel(@PathVariable(value = "level_id") ObjectId levelId) {
+    public Level getCurrentLevel(@PathVariable(value = "level_id") String levelIdStr) {
+        ObjectId levelId = new ObjectId(levelIdStr);
         return levelService.findByLevelId(levelId);
     }
 }
