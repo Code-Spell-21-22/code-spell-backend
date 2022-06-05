@@ -40,10 +40,6 @@ public class ChapterControllerTest {
     @Autowired
     private ChapterRepository chapterRepository;
 
-    private Chapter chapter1;
-
-    private Chapter chapter2;
-
     private HttpEntity<String> jwtEntity;
 
     @BeforeAll
@@ -61,9 +57,9 @@ public class ChapterControllerTest {
 
     @BeforeEach
     void setUp() {
-        chapter1 = new Chapter(new ObjectId(), "Variables", "Learn the basics about Java variables.", 
+        Chapter chapter1 = new Chapter(new ObjectId(), "Variables", "Learn the basics about Java variables.", 
         1, Collections.emptyList(), Collections.emptyList(), new Settings(ProgrammingLanguage.JAVA, SkillLevel.NOVICE));
-        chapter2 = new Chapter(new ObjectId(), "Object Oriented Programming", "Learn the basics about Java OOP.", 
+        Chapter chapter2 = new Chapter(new ObjectId(), "Object Oriented Programming", "Learn the basics about Java OOP.", 
         2, Collections.emptyList(), Collections.emptyList(), new Settings(ProgrammingLanguage.JAVA, SkillLevel.NOVICE));
 
         chapterRepository.save(chapter1);
