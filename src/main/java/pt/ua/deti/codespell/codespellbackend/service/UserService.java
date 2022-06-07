@@ -1,9 +1,13 @@
 package pt.ua.deti.codespell.codespellbackend.service;
 
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.ExistentUserException;
+import pt.ua.deti.codespell.codespellbackend.exception.implementations.InvalidEmailException;
+import pt.ua.deti.codespell.codespellbackend.exception.implementations.InvalidPasswordException;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.UserNotFoundException;
 import pt.ua.deti.codespell.codespellbackend.model.User;
 import pt.ua.deti.codespell.codespellbackend.repository.UserRepository;
@@ -37,11 +41,26 @@ public class UserService {
     }
 
     public void registerUser(User user) {
+        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        boolean emailChecker = Pattern.matches(emailRegex, user.getEmail());
+        String passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
+        boolean passwordChecker = Pattern.matches(passwordRegex, user.getPassword());
 
         if (userRepository.existsByUsername(user.getUsername()))
             throw new ExistentUserException("The provided username is already taken.");
+        else if (!emailChecker)
+            throw new InvalidEmailException("The provided email is invalid.");
+        else if (!passwordChecker)
+            throw new InvalidPasswordException("The provided password is invalid.");
         userRepository.save(user);
 
     }
 
+    public void updateUser(User user) {
+        
+        if (!userRepository.existsByUsername(user.getUsername()))
+            throw new UserNotFoundException(String.format("The user %s could not be found.", user.getUsername()));
+        userRepository.save(user);
+
+    }
 }
