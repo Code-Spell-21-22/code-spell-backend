@@ -41,16 +41,14 @@ public class UserService {
     }
 
     public void registerUser(User user) {
-        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        String emailRegex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         boolean emailChecker = Pattern.matches(emailRegex, user.getEmail());
-        String passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
-        boolean passwordChecker = Pattern.matches(passwordRegex, user.getPassword());
 
         if (userRepository.existsByUsername(user.getUsername()))
             throw new ExistentUserException("The provided username is already taken.");
         else if (!emailChecker)
             throw new InvalidEmailException("The provided email is invalid.");
-        else if (!passwordChecker)
+        else if (user.getPassword().length() < 6 || user.getPassword() == null)
             throw new InvalidPasswordException("The provided password is invalid.");
         userRepository.save(user);
 
