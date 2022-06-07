@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.ExistentUserException;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.InvalidEmailException;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.InvalidPasswordException;
+import pt.ua.deti.codespell.codespellbackend.exception.implementations.InvalidUsernameException;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.UserNotFoundException;
 import pt.ua.deti.codespell.codespellbackend.model.User;
 import pt.ua.deti.codespell.codespellbackend.repository.UserRepository;
@@ -50,6 +51,8 @@ public class UserService {
             throw new InvalidEmailException("The provided email is invalid.");
         else if (user.getPassword().length() < 6 || user.getPassword() == null)
             throw new InvalidPasswordException("The provided password is invalid.");
+        else if (user.getUsername().length() < 3 || user.getUsername() == null)
+            throw new InvalidUsernameException("The provided username is invalid.");
         userRepository.save(user);
 
     }
