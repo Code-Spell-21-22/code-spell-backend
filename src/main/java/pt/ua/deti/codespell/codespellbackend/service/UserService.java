@@ -47,6 +47,8 @@ public class UserService {
 
         if (userRepository.existsByUsername(user.getUsername()))
             throw new ExistentUserException("The provided username is already taken.");
+        else if (userRepository.existsByEmail(user.getEmail()))
+            throw new ExistentUserException("The provided email is already taken.");
         else if (!emailChecker)
             throw new InvalidEmailException("The provided email is invalid.");
         else if (user.getPassword().length() < 6 || user.getPassword() == null)
