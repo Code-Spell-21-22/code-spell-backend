@@ -42,7 +42,7 @@ public class LevelController {
         return level.getDocumentation();
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Level> getLevelsList(ProgrammingLanguage programmingLanguage, SkillLevel skillLevel) {
         return levelService.getAllLevels();
     }

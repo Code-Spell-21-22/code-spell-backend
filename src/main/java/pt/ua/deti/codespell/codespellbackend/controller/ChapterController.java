@@ -23,8 +23,9 @@ public class ChapterController {
         this.chapterService = chapterService;
     }
 
-    @GetMapping("/")
-    public List<Chapter> getChaptersList(ProgrammingLanguage programmingLanguage, SkillLevel skillLevel) {
+    @GetMapping("")
+    public List<Chapter> getChaptersList() {
         return chapterService.getAllChapters();
     }
+
 }
