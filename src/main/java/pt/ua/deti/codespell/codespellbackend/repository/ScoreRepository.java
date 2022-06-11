@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface ScoreRepository extends MongoRepository<Score, Long> {
 
+    List<Score> findByLevelId(ObjectId objectId);
+
     List<Score> findByLevelIdAndSettings(ObjectId objectId, Settings settings);
+
+    List<Score> findByUsernameAndLevelIdAndSettings(String username, ObjectId objectId, Settings settings);
 
 }

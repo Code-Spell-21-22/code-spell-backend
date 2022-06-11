@@ -1,7 +1,6 @@
 package pt.ua.deti.codespell.codespellbackend.controller;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import pt.ua.deti.codespell.codespellbackend.exception.implementations.BadReques
 import pt.ua.deti.codespell.codespellbackend.utils.NameChangeRequest;
 import pt.ua.deti.codespell.codespellbackend.utils.PasswordChangeRequest;
 import pt.ua.deti.codespell.codespellbackend.model.Achievement;
-import pt.ua.deti.codespell.codespellbackend.model.Game;
 import pt.ua.deti.codespell.codespellbackend.model.User;
 import pt.ua.deti.codespell.codespellbackend.request.MessageResponse;
 import pt.ua.deti.codespell.codespellbackend.service.UserService;
@@ -39,19 +37,8 @@ public class UserController {
 
     @GetMapping("/{email}/achievements")
     public List<Achievement> getUserAchievements(@PathVariable(value = "email") String email) {
-
         User user = userService.findByEmail(email);
-        List<Achievement> achievements = new ArrayList<>();
-        List<Game> games = user.getGames();
-
-        if (games != null) {
-            for (Game g : games) {
-                achievements.addAll(g.getAchievements());
-            }
-        }
-
-        return achievements;
-
+        return user.getAchievements();
     }
 
     @PutMapping("/{email}/password")

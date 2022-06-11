@@ -26,9 +26,9 @@ public class Score implements IDataEntity {
     private ObjectId levelId;
 
     @NonNull
-    @JsonSerialize(using=ToStringSerializer.class)
-    private ObjectId userId;
+    private String username;
 
+    @NonNull
     private int points;
 
     private Settings settings;
