@@ -54,4 +54,10 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(AchievementNotFoundException.class)
+    public ResponseEntity<?> achievementNotFoundException(AchievementNotFoundException achievementNotFoundException, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), achievementNotFoundException.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
 }
