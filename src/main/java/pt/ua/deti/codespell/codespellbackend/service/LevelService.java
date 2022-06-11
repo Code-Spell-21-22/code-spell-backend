@@ -34,4 +34,9 @@ public class LevelService {
         return levelRepository.findById(levelId);
     }
 
+
+    public boolean existsByLevelId(ObjectId levelId) {
+        return levelRepository.existsById(levelId);
+    }
+
 }

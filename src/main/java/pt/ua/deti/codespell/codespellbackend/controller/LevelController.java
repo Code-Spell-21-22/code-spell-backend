@@ -3,6 +3,7 @@ package pt.ua.deti.codespell.codespellbackend.controller;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.bson.types.ObjectId;
@@ -32,8 +33,14 @@ public class LevelController {
     }
 
     @GetMapping("/{level_id}/leaderboards")
-    public List<Score> getLevelLeaderboard(@PathVariable(value = "level_id") ObjectId levelId, Settings settings) {
-        return scoreService.getScoresByLevelAndSettings(levelId, settings);
+    public List<Score> getLevelLeaderboard(@PathVariable(value = "level_id") ObjectId levelId, @RequestBody Optional<Settings> settings) {
+
+        if (settings.isPresent()) {
+            return scoreService.getScoresByLevelAndSettings(levelId, settings.get());
+        } else {
+            return scoreService.getScoresByLevel(levelId);
+        }
+
     }
 
     @GetMapping("/{level_id}/documentation")
@@ -47,14 +54,8 @@ public class LevelController {
         return levelService.getAllLevels();
     }
 
-    @GetMapping("/{level_id}/solutions")
-    public List<Solution> getLevelSolutions(@PathVariable(value = "level_id") ObjectId levelId, ProgrammingLanguage language) {
-        Level level = levelService.findByLevelId(levelId);
-        return level.getSolutions();
-    }
-
-    @PostMapping("/{level_id}/submit/{solution_id}")
-    public MessageResponse submitLevelSolution(@PathVariable(value = "level_id") String levelIdStr, @PathVariable(value="solution_id") String solutionUniqueIdStr, @RequestBody String code) {
+    @PostMapping("/{level_id}/submit/{code_id}")
+    public MessageResponse submitLevelCode(@PathVariable(value = "level_id") String levelIdStr, @PathVariable(value="code_id") String solutionUniqueIdStr, @RequestBody String code) {
 
         if (!ObjectId.isValid(levelIdStr))
             throw new BadRequestException("Unable to parse level_id.");
@@ -77,4 +78,5 @@ public class LevelController {
     public Level getCurrentLevel(@PathVariable(value = "level_id") ObjectId levelId) {
         return levelService.findByLevelId(levelId);
     }
+
 }

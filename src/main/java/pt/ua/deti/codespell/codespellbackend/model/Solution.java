@@ -10,6 +10,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.UUID;
+
 @Document(collection = "solutions")
 @Generated
 @Data
@@ -21,12 +23,21 @@ public class Solution implements IDataEntity {
     @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId id;
 
-    @JsonSerialize(using=ToStringSerializer.class)
-    private ObjectId authorId;
-
-    private int scorePoints;
+    @NonNull
+    private String authorUsername;
 
     @NonNull
+    @JsonSerialize(using=ToStringSerializer.class)
+    private ObjectId levelId;
+
+    @NonNull
+    private UUID codeReportId;
+
+    @NonNull
+    private int score;
+
+    private Settings settings;
+
     private String code;
 
 }

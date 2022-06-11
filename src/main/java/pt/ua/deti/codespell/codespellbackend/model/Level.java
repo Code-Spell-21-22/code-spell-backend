@@ -40,8 +40,6 @@ public class Level implements IDataEntity {
 
     private List<Documentation> documentation;
 
-    private List<Solution> solutions;
-
     @NonNull
     private Settings settings;
 

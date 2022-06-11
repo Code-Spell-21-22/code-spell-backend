@@ -19,8 +19,21 @@ public class ScoreService {
         this.scoreRepository = scoreRepository;
     }
 
+    public List<Score> getScoresByLevel(ObjectId levelId) {
+        return scoreRepository.findByLevelId(levelId);
+    }
+
     public List<Score> getScoresByLevelAndSettings(ObjectId levelId, Settings settings) {
         return scoreRepository.findByLevelIdAndSettings(levelId, settings);
+    }
+
+    public void saveScore(String username, ObjectId levelId, int points, Settings settings) {
+
+        System.out.println("Saving score");
+
+        scoreRepository.deleteAll(scoreRepository.findByUsernameAndLevelIdAndSettings(username, levelId, settings));
+        scoreRepository.save(new Score(null, levelId, username, points, settings));
+
     }
 
 }

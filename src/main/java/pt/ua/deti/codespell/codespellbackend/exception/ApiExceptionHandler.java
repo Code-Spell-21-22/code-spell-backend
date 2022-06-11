@@ -42,4 +42,16 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ForbiddenAccessException.class)
+    public ResponseEntity<?> forbiddenAccessException(ForbiddenAccessException forbiddenAccessException, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), forbiddenAccessException.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(IllegalSolutionException.class)
+    public ResponseEntity<?> illegalSolutionException(IllegalSolutionException illegalSolutionException, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), illegalSolutionException.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
 }
