@@ -1,6 +1,7 @@
 package pt.ua.deti.codespell.codespellbackend.controller;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import pt.ua.deti.codespell.codespellbackend.code_execution.CodeExecutionHandler;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.BadRequestException;
+import pt.ua.deti.codespell.codespellbackend.exception.implementations.LevelNotFoundException;
 import pt.ua.deti.codespell.codespellbackend.model.*;
 import pt.ua.deti.codespell.codespellbackend.request.MessageResponse;
 import pt.ua.deti.codespell.codespellbackend.service.LevelService;
@@ -74,7 +76,23 @@ public class LevelController {
     }
 
     @GetMapping("/{level_id}")
-    public Level getCurrentLevel(@PathVariable(value = "level_id") ObjectId levelId) {
-        return levelService.findByLevelId(levelId);
+    public Level getCurrentLevel(@PathVariable(value = "level_id") String levelIdStr) {
+
+        if (!ObjectId.isValid(levelIdStr))
+            throw new BadRequestException("The level id doesn't comply with the correct format.");
+        return levelService.findByLevelId(new ObjectId(levelIdStr));
+
     }
+
+    @GetMapping("/{level_id}/goals")
+    public List<Goal> getLevelGoals(@PathVariable(value = "level_id") String levelIdStr) {
+
+        if (!ObjectId.isValid(levelIdStr))
+            throw new BadRequestException("The level id doesn't comply with the correct format.");
+
+        Level level = levelService.findByLevelId(new ObjectId(levelIdStr));
+        return level.getGoals() != null ? level.getGoals() : new ArrayList<>();
+
+    }
+
 }
