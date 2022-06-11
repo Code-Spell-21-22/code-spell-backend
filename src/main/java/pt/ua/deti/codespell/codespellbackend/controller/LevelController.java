@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import pt.ua.deti.codespell.codespellbackend.code_execution.CodeExecutionHandler;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.BadRequestException;
-import pt.ua.deti.codespell.codespellbackend.exception.implementations.LevelNotFoundException;
 import pt.ua.deti.codespell.codespellbackend.model.*;
 import pt.ua.deti.codespell.codespellbackend.request.MessageResponse;
+import pt.ua.deti.codespell.codespellbackend.service.InjectableCodeService;
 import pt.ua.deti.codespell.codespellbackend.service.LevelService;
 import pt.ua.deti.codespell.codespellbackend.service.ScoreService;
 
@@ -25,12 +25,14 @@ public class LevelController {
     
     private final LevelService levelService;
     private final ScoreService scoreService;
+    private final InjectableCodeService injectableCodeService;
     private final CodeExecutionHandler codeExecutionHandler;
 
     @Autowired
-    public LevelController(LevelService levelService, ScoreService scoreService, CodeExecutionHandler codeExecutionHandler) {
+    public LevelController(LevelService levelService, ScoreService scoreService, InjectableCodeService injectableCodeService, CodeExecutionHandler codeExecutionHandler) {
         this.levelService = levelService;
         this.scoreService = scoreService;
+        this.injectableCodeService = injectableCodeService;
         this.codeExecutionHandler = codeExecutionHandler;
     }
 
@@ -93,6 +95,18 @@ public class LevelController {
 
         Level level = levelService.findByLevelId(new ObjectId(levelIdStr));
         return level.getGoals() != null ? level.getGoals() : new ArrayList<>();
+
+    }
+
+    @GetMapping("/{level_id}/code")
+    public InjectableCode getLevelInjectableCode(@PathVariable(value = "level_id") String levelIdStr) {
+
+        if (!ObjectId.isValid(levelIdStr))
+            throw new BadRequestException("The level id doesn't comply with the correct format.");
+
+        ObjectId levelId = new ObjectId(levelIdStr);
+
+        return injectableCodeService.getInjectableCodeForLevel(levelId);
 
     }
 
