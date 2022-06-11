@@ -16,6 +16,8 @@ public class CodeExecReport implements Serializable {
     private List<Step> steps;
     private int score;
     private List<String> output;
+    private List<String> tips;
     private List<String> errors;
+    private List<String> runtimeLogs;
 
 }
