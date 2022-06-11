@@ -20,7 +20,7 @@ public class Achievement implements IDataEntity {
 
     @Id
     @NonNull
-    @JsonSerialize(using= ToStringSerializer.class)
+    @JsonSerialize(using=ToStringSerializer.class)
     private ObjectId id;
 
     @NonNull
@@ -28,10 +28,5 @@ public class Achievement implements IDataEntity {
 
     @NonNull
     private String description;
-
-    private Date timestamp;
-
-    @NonNull
-    private boolean isCompleted;
 
 }

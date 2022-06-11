@@ -37,7 +37,7 @@ public class User implements IDataEntity {
 
     private List<ObjectId> friendsIds;
 
-    private List<Achievement> achievements;
+    private List<ObjectId> achievements;
 
     public User(@NonNull String username, @NonNull String email, @NonNull String password, @NonNull List<GrantedAuthority> permissions) {
         this.username = username;
