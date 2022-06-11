@@ -35,10 +35,10 @@ public class LevelController {
     }
 
     @GetMapping("/{level_id}/leaderboards")
-    public List<Score> getLevelLeaderboard(@PathVariable(value = "level_id") ObjectId levelId, @RequestBody Optional<Settings> settings) {
+    public List<Score> getLevelLeaderboard(@PathVariable(value = "level_id") ObjectId levelId, @RequestParam Optional<ProgrammingLanguage> language, @RequestParam Optional<SkillLevel> skillLevel) {
 
-        if (settings.isPresent()) {
-            return scoreService.getScoresByLevelAndSettings(levelId, settings.get());
+        if (language.isPresent() && skillLevel.isPresent()) {
+            return scoreService.getScoresByLevelAndSettings(levelId, new Settings(language.get(), skillLevel.get()));
         } else {
             return scoreService.getScoresByLevel(levelId);
         }
