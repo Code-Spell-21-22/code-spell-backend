@@ -24,6 +24,10 @@ public class Achievement implements IDataEntity {
     private ObjectId id;
 
     @NonNull
+    @JsonSerialize(using=ToStringSerializer.class)
+    private ObjectId levelId;
+
+    @NonNull
     private String title;
 
     @NonNull

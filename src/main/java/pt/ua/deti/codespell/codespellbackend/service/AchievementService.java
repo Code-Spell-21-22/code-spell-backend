@@ -35,4 +35,9 @@ public class AchievementService {
 
     }
 
+    @NonNull
+    public List<Achievement> getAchievementByLevelId(ObjectId levelId) {
+        return achievementRepository.findAllByLevelId(levelId);
+    }
+
 }

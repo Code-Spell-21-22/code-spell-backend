@@ -6,11 +6,16 @@ import org.springframework.stereotype.Repository;
 import pt.ua.deti.codespell.codespellbackend.model.Achievement;
 import pt.ua.deti.codespell.codespellbackend.service.AchievementService;
 
+import java.util.List;
+
 @Repository
 public interface AchievementRepository extends MongoRepository<Achievement, Long> {
 
     Achievement findById(ObjectId achievementId);
 
     boolean existsById(ObjectId achievementId);
+
+    List<Achievement> findAllByLevelId(ObjectId levelId);
+
 
 }
