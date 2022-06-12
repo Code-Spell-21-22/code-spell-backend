@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
+import java.util.Set;
 
 @Document(collection = "users")
 @Generated
@@ -37,7 +38,7 @@ public class User implements IDataEntity {
 
     private List<ObjectId> friendsIds;
 
-    private List<ObjectId> achievements;
+    private Set<ObjectId> achievements;
 
     public User(@NonNull String username, @NonNull String email, @NonNull String password, @NonNull List<GrantedAuthority> permissions) {
         this.username = username;
