@@ -22,11 +22,11 @@ public class ScoreService {
     }
 
     public List<Score> getScoresByLevel(ObjectId levelId) {
-        return scoreRepository.findByLevelId(levelId).stream().sorted(Comparator.comparingInt(Score::getPoints)).collect(Collectors.toList());
+        return scoreRepository.findByLevelId(levelId).stream().sorted(Comparator.comparingInt(Score::getPoints).reversed()).collect(Collectors.toList());
     }
 
     public List<Score> getScoresByLevelAndSettings(ObjectId levelId, Settings settings) {
-        return scoreRepository.findByLevelIdAndSettings(levelId, settings).stream().sorted(Comparator.comparingInt(Score::getPoints)).collect(Collectors.toList());
+        return scoreRepository.findByLevelIdAndSettings(levelId, settings).stream().sorted(Comparator.comparingInt(Score::getPoints).reversed()).collect(Collectors.toList());
     }
 
     public void saveScore(String username, ObjectId levelId, int points, Settings settings) {
