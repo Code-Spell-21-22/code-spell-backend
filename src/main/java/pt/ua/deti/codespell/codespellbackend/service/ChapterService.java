@@ -31,5 +31,9 @@ public class ChapterService {
         return chapterRepository.findById(chapterId);
     }
 
+    public boolean existsById(ObjectId objectId) {
+        return chapterRepository.existsById(objectId);
+    }
+
 }
  
