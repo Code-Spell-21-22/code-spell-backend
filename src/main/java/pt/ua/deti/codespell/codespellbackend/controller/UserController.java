@@ -1,9 +1,7 @@
 package pt.ua.deti.codespell.codespellbackend.controller;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.bson.types.ObjectId;
@@ -68,7 +66,7 @@ public class UserController {
         }
 
         Achievement achievement = achievementService.getAchievementById(new ObjectId(achievementRequest.getAchievementId()));
-        List<ObjectId> userAchievements = user.getAchievements() != null ? user.getAchievements() : new ArrayList<>();
+        Set<ObjectId> userAchievements = user.getAchievements() != null ? user.getAchievements() : new HashSet<>();
 
         userAchievements.add(achievement.getId());
         user.setAchievements(userAchievements);
