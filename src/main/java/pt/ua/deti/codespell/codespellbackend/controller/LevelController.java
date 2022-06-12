@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import pt.ua.deti.codespell.codespellbackend.code_execution.CodeExecutionHandler;
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.BadRequestException;
+import pt.ua.deti.codespell.codespellbackend.exception.implementations.LevelNotFoundException;
 import pt.ua.deti.codespell.codespellbackend.model.*;
 import pt.ua.deti.codespell.codespellbackend.request.MessageResponse;
 import pt.ua.deti.codespell.codespellbackend.service.AchievementService;
@@ -31,8 +32,7 @@ public class LevelController {
     private final CodeExecutionHandler codeExecutionHandler;
 
     @Autowired
-    public LevelController(LevelService levelService, ScoreService scoreService, InjectableCodeService injectableCodeService, CodeExecutionHandler codeExecutionHandler) {
-    public LevelController(LevelService levelService, ScoreService scoreService, AchievementService achievementService, CodeExecutionHandler codeExecutionHandler) {
+    public LevelController(LevelService levelService, ScoreService scoreService, InjectableCodeService injectableCodeService, AchievementService achievementService, CodeExecutionHandler codeExecutionHandler) {
         this.levelService = levelService;
         this.scoreService = scoreService;
         this.injectableCodeService = injectableCodeService;
