@@ -16,6 +16,7 @@ import pt.ua.deti.codespell.codespellbackend.exception.implementations.BadReques
 import pt.ua.deti.codespell.codespellbackend.exception.implementations.LevelNotFoundException;
 import pt.ua.deti.codespell.codespellbackend.model.*;
 import pt.ua.deti.codespell.codespellbackend.request.MessageResponse;
+import pt.ua.deti.codespell.codespellbackend.service.AchievementService;
 import pt.ua.deti.codespell.codespellbackend.service.LevelService;
 import pt.ua.deti.codespell.codespellbackend.service.ScoreService;
 
@@ -25,12 +26,14 @@ public class LevelController {
     
     private final LevelService levelService;
     private final ScoreService scoreService;
+    private final AchievementService achievementService;
     private final CodeExecutionHandler codeExecutionHandler;
 
     @Autowired
-    public LevelController(LevelService levelService, ScoreService scoreService, CodeExecutionHandler codeExecutionHandler) {
+    public LevelController(LevelService levelService, ScoreService scoreService, AchievementService achievementService, CodeExecutionHandler codeExecutionHandler) {
         this.levelService = levelService;
         this.scoreService = scoreService;
+        this.achievementService = achievementService;
         this.codeExecutionHandler = codeExecutionHandler;
     }
 
@@ -93,6 +96,22 @@ public class LevelController {
 
         Level level = levelService.findByLevelId(new ObjectId(levelIdStr));
         return level.getGoals() != null ? level.getGoals() : new ArrayList<>();
+
+    }
+
+    @GetMapping("/{level_id}/achievements")
+    public List<Achievement> getLevelAchievements(@PathVariable(value = "level_id") String levelIdStr) {
+
+        if (!ObjectId.isValid(levelIdStr))
+            throw new BadRequestException("The level id doesn't comply with the correct format.");
+
+        ObjectId levelId = new ObjectId(levelIdStr);
+
+        if (!levelService.existsByLevelId(levelId)) {
+            throw new LevelNotFoundException("The level %s could not be found.");
+        }
+
+        return achievementService.getAchievementByLevelId(levelId);
 
     }
 
