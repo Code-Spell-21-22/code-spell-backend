@@ -20,7 +20,7 @@ public class CodeSpellBackendApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000", "http://159.65.60.64:3000", "https://dev.codespell.live")
+                        .allowedOrigins("http://localhost:3000", "http://159.65.60.64:3000", "https://dev.codespell.live", "https://codespell.live")
                         .allowedMethods("GET", "POST","PUT", "DELETE");
             }
 
